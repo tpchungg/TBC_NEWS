@@ -25,8 +25,11 @@
 package com.example.android.newsfeed;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import androidx.core.view.GravityCompat;
@@ -37,15 +40,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.android.newsfeed.adapter.CategoryFragmentPagerAdapter;
 import com.example.android.newsfeed.utils.Constants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
-
+    ImageView imgAvatar;
+    TextView tvName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +89,9 @@ public class MainActivity extends AppCompatActivity
                 new CategoryFragmentPagerAdapter(this, getSupportFragmentManager());
         // Set the pager adapter onto the view pager
         viewPager.setAdapter(pagerAdapter);
+        imgAvatar=navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
+        tvName=navigationView.getHeaderView(0).findViewById(R.id.textViewName);
+        showUserInformation();
     }
 
     @Override
@@ -117,6 +129,14 @@ public class MainActivity extends AppCompatActivity
             viewPager.setCurrentItem(Constants.BUSINESS);
         } else if (id == R.id.nav_culture) {
             viewPager.setCurrentItem(Constants.CULTURE);
+        }else if(id==R.id.nav_sign_out){
+            FirebaseAuth.getInstance().signOut();
+            Intent intent =new Intent(this,log_in.class);
+            startActivity(intent);
+            finish();
+        }else if(id==R.id.nav_my_profile){
+            viewPager.setCurrentItem(Constants.PROFILE);
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -143,5 +163,25 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+    //Show user infor
+    private void showUserInformation(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            Uri photoUrl = user.getPhotoUrl();
+            if(name==null){
+                tvName.setVisibility(View.GONE);
+            }else{
+                tvName.setVisibility(View.VISIBLE);
+                tvName.setText(name);}
+            Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar_default).into(imgAvatar);       // Check if user's email is verified
 
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+        } else {
+            return;
+        }
+    }
 }

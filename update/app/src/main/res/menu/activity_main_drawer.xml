@@ -43,4 +43,15 @@
             android:icon="@drawable/ic_menu_culture"
             android:title="@string/ic_title_culture" />
     </group>
+    <item android:title="Account">
+        <menu>
+            <item android:id="@+id/nav_my_profile"
+                android:icon="@drawable/ic_profile"
+                android:title="My Profile"/>
+            <item android:id="@+id/nav_sign_out"
+                android:title="Sign Out"
+                android:icon="@drawable/ic_logout"
+                />
+        </menu>
+    </item>
 </menu>

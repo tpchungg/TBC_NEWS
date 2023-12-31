@@ -71,7 +71,7 @@
                             style="@style/parent"
                             android:layout_marginTop="@dimen/signup_text_margin_top">
                             <EditText
-                                android:id="@+id/editText_email_sign_up"
+                                android:id="@+id/editText_userName_sign_up"
                                 style="@style/modifiedEditText"
                                 android:inputType="text"
                                 android:maxLines="1"
@@ -83,7 +83,8 @@
                             android:layout_marginTop="@dimen/signup_text_margin_top">
                             <EditText
                                 style="@style/modifiedEditText"
-                                android:inputType="text"
+                                android:id="@+id/editText_phone_sign_up"
+                                android:inputType="phone"
                                 android:maxLines="1"
                                 android:hint="Mobile Number"/>
                         </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +94,7 @@
                             android:layout_marginTop="@dimen/signup_text_margin_top">
                             <EditText
                                 style="@style/modifiedEditText"
+                                android:id="@+id/editText_email_sign_up"
                                 android:inputType="textEmailAddress"
                                 android:maxLines="1"
                                 android:hint="@string/login_email_hint"/>

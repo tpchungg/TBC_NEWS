@@ -30,6 +30,7 @@ package com.example.android.newsfeed.utils;
 
 public class Constants {
 
+
     /**
      * Create a private constructor because no one should ever create a {@link Constants} object.
      */
@@ -100,5 +101,6 @@ public class Constants {
     public static final int FASHION = 6;
     public static final int BUSINESS = 7;
     public static final int CULTURE = 8;
+    public static final int PROFILE = 9;
 
 }
