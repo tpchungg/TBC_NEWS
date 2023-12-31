@@ -18,7 +18,18 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            app:defaultQueryHint="Search News..."
+            app:iconifiedByDefault="true"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
 
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/rounded_corner"
+            android:theme="@style/AppTheme.PopupOverlay">
+
+        </androidx.appcompat.widget.SearchView>
         <!-- TabLayout that provides a horizontal layout to display tabs -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/sliding_tabs"

@@ -24,11 +24,13 @@
 
 package com.example.android.newsfeed;
 
+import java.io.Serializable;
+
 /**
  * An {@link News} object contains information related to a single news.
  */
 
-public class News {
+public class News  implements Serializable {
 
     /** Title of the article */
     private String mTitle;
@@ -50,15 +52,16 @@ public class News {
 
     /** TrailText of the article with string type Html */
     private String mTrailTextHtml;
+    private String mquery;
 
     /**
      * Constructs a new {@link News} object.
      *
-     * @param title is the title of the article
-     * @param section is the section name of the article
-     * @param author is author name in article
-     * @param date is the web publication date of the article
-     * @param url is the website URL to find more details about the article
+     * @param title     is the title of the article
+     * @param section   is the section name of the article
+     * @param author    is author name in article
+     * @param date      is the web publication date of the article
+     * @param url       is the website URL to find more details about the article
      * @param thumbnail is the thumbnail of the article
      * @param trailText is trail text of the article with string type Html
      */

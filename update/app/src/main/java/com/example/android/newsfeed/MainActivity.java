@@ -30,8 +30,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.android.newsfeed.adapter.NewsAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -55,6 +58,9 @@ public class MainActivity extends AppCompatActivity
     private ViewPager viewPager;
     ImageView imgAvatar;
     TextView tvName;
+    SearchView searchView;
+
+    NewsAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +98,25 @@ public class MainActivity extends AppCompatActivity
         imgAvatar=navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         tvName=navigationView.getHeaderView(0).findViewById(R.id.textViewName);
         showUserInformation();
+        searchNews();
+
+    }
+
+    private void searchNews() {
+        searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -184,4 +209,6 @@ public class MainActivity extends AppCompatActivity
             return;
         }
     }
+
+
 }
