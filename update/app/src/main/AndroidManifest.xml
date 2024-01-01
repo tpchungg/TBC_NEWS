@@ -17,6 +17,9 @@
             android:name=".MyProfile"
             android:exported="false" />
         <activity
+            android:name=".DetailNews"
+            android:exported="false" />
+        <activity
             android:name=".SlashActivity"
             android:exported="true">
             <intent-filter>

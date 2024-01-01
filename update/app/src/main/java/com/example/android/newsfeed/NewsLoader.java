@@ -29,12 +29,13 @@ import android.content.Context;
 
 import com.example.android.newsfeed.utils.QueryUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Loads a list of news by using an AsyncTask to perform the network request to the given URL.
  */
-public class NewsLoader extends AsyncTaskLoader<List<News>> {
+public class NewsLoader extends AsyncTaskLoader<List<News>> implements Serializable {
 
     /** Tag for log messages */
     private static final String LOG_TAG = NewsLoader.class.getName();

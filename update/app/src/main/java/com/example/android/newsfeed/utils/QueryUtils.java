@@ -193,6 +193,8 @@ public class QueryUtils {
                 // For a given news, extract the value for the key called "webUrl"
                 String webUrl = currentNews.getString(Constants.JSON_KEY_WEB_URL);
 
+//                String query = currentNews.getString(Constants.QUERY_PARAM);
+
                 // For a given news, if it contains the key called "tags", extract JSONArray
                 // associated with the key "tags"
                 String author = null;
@@ -223,7 +225,6 @@ public class QueryUtils {
                         trailText = fieldsObject.getString(Constants.JSON_KEY_TRAIL_TEXT);
                     }
                 }
-
                 // Create a new {@link News} object with the title and url from the JSON response.
                 News news = new News(webTitle, sectionName, author, webPublicationDate, webUrl, thumbnail, trailText);
 

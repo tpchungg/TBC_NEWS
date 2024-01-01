@@ -1,26 +1,4 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Soojeong Shin
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+
 
 package com.example.android.newsfeed.adapter;
 
@@ -39,6 +17,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,6 +28,7 @@ import com.example.android.newsfeed.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -58,10 +39,13 @@ import java.util.TimeZone;
  * ( a list of {@link News} objects).
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> implements Filterable {
     private Context mContext;
     private List<News> mNewsList;
+
+    private List<News> mNewsList1;
     private SharedPreferences sharedPrefs;
+
 
     /**
      * Constructs a new {@link NewsAdapter}
@@ -71,6 +55,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter(Context context, List<News> newsList) {
         mContext = context;
         mNewsList = newsList;
+        mNewsList1= newsList;
     }
 
     @Override
@@ -83,6 +68,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public int getItemCount() {
         return mNewsList.size();
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
@@ -139,10 +125,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         String trailTextHTML = currentNews.getTrailTextHtml();
         holder.trailTextView.setText(Html.fromHtml(Html.fromHtml(trailTextHTML).toString()));
 
-        // Set an OnClickListener to open a website with more information about the selected article
+//         Set an OnClickListener to open a website with more information about the selected article
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
                 Uri newsUri = Uri.parse(currentNews.getUrl());
 
@@ -153,6 +139,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 mContext.startActivity(websiteIntent);
             }
         });
+
+
 
         if (currentNews.getThumbnail() == null) {
             holder.thumbnailImageView.setVisibility(View.GONE);
@@ -345,5 +333,36 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         long publicationTime = getDateInMillis(formattedDate);
         return DateUtils.getRelativeTimeSpanString(publicationTime, currentTime,
                 DateUtils.SECOND_IN_MILLIS);
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if(strSearch.isEmpty()){
+                    mNewsList = mNewsList1;
+                }
+                else{
+                    List<News> list = new ArrayList<News>();
+                    for(News news : mNewsList1){
+                        if(news.getTitle().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(news);
+                        }
+                    }
+                    mNewsList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mNewsList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mNewsList = (List<News>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
