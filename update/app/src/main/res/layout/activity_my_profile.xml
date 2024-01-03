@@ -41,7 +41,7 @@
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
-                    android:text="TPC NEWS"
+                    android:text="TBC NEWS"
                     android:textSize="40dp"
                     android:layout_marginTop="40dp"/>
                 <androidx.cardview.widget.CardView

@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/faustina_regular"
         android:text="TBC NEWS"
+        android:textColor="@color/whiteTextColor"
         android:textSize="35sp"
         android:textStyle="bold" />
 
