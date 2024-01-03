@@ -1,26 +1,3 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Soojeong Shin
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 
 package com.example.android.newsfeed;
 
@@ -45,6 +22,8 @@ import static com.example.android.newsfeed.utils.Constants.SHOW_FIELDS;
 import static com.example.android.newsfeed.utils.Constants.SHOW_FIELDS_PARAM;
 import static com.example.android.newsfeed.utils.Constants.SHOW_TAGS;
 import static com.example.android.newsfeed.utils.Constants.SHOW_TAGS_PARAM;
+
+import androidx.appcompat.widget.SearchView;
 
 public final class NewsPreferences {
 
@@ -76,7 +55,6 @@ public final class NewsPreferences {
         String fromDate = sharedPrefs.getString(
                 context.getString(R.string.settings_from_date_key),
                 context.getString(R.string.settings_from_date_default));
-
         // Parse breaks apart the URI string that is passed into its parameter
         Uri baseUri = Uri.parse(Constants.NEWS_REQUEST_URL);
 
@@ -92,7 +70,7 @@ public final class NewsPreferences {
         uriBuilder.appendQueryParameter(SHOW_FIELDS_PARAM, SHOW_FIELDS);
         uriBuilder.appendQueryParameter(FORMAT_PARAM, FORMAT);
         uriBuilder.appendQueryParameter(SHOW_TAGS_PARAM, SHOW_TAGS);
-        uriBuilder.appendQueryParameter(API_KEY_PARAM, API_KEY); // Use your API key when API rate limit exceeded
+        uriBuilder.appendQueryParameter(API_KEY_PARAM, API_KEY);
 
         return uriBuilder;
     }
@@ -105,5 +83,9 @@ public final class NewsPreferences {
     public static String getPreferredUrl(Context context, String section) {
         Uri.Builder uriBuilder = getPreferredUri(context);
         return uriBuilder.appendQueryParameter(SECTION_PARAM, section).toString();
+    }
+    public static String getSearchUrl(Context context, String query){
+        Uri.Builder uriBuilder = getPreferredUri(context);
+        return uriBuilder.appendQueryParameter(QUERY_PARAM, query).toString();
     }
 }

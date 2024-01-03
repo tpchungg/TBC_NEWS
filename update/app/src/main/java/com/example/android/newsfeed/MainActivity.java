@@ -1,51 +1,68 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Soojeong Shin
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 
 package com.example.android.newsfeed;
 
+import static android.app.PendingIntent.getActivity;
+import static com.example.android.newsfeed.NewsPreferences.getPreferredUri;
+import static com.example.android.newsfeed.utils.Constants.QUERY_PARAM;
+import static com.example.android.newsfeed.utils.Constants.SECTION_PARAM;
+
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+<<<<<<< Updated upstream
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+=======
+
+import com.bumptech.glide.Glide;
+import com.example.android.newsfeed.adapter.NewsAdapter;
+import com.example.android.newsfeed.fragment.BaseArticlesFragment;
+import com.example.android.newsfeed.utils.QueryUtils;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+>>>>>>> Stashed changes
 import androidx.core.view.GravityCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+<<<<<<< Updated upstream
+=======
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+>>>>>>> Stashed changes
 
 import com.example.android.newsfeed.adapter.CategoryFragmentPagerAdapter;
 import com.example.android.newsfeed.utils.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements LoaderManager.LoaderCallbacks<List<News>>, NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
+<<<<<<< Updated upstream
 
+=======
+    ImageView imgAvatar;
+    TextView tvName;
+>>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +97,7 @@ public class MainActivity extends AppCompatActivity
                 new CategoryFragmentPagerAdapter(this, getSupportFragmentManager());
         // Set the pager adapter onto the view pager
         viewPager.setAdapter(pagerAdapter);
+<<<<<<< Updated upstream
     }
 
     @Override
@@ -91,6 +109,14 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+=======
+        imgAvatar=navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
+        tvName=navigationView.getHeaderView(0).findViewById(R.id.textViewName);
+        showUserInformation();
+
+    }
+
+>>>>>>> Stashed changes
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -144,4 +170,26 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    @NonNull
+    @Override
+    public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<List<News>> loader) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 }

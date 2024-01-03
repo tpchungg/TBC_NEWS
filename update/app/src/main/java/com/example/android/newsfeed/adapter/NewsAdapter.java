@@ -24,6 +24,8 @@
 
 package com.example.android.newsfeed.adapter;
 
+import static com.example.android.newsfeed.utils.Constants.QUERY_PARAM;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,6 +47,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.android.newsfeed.News;
 import com.example.android.newsfeed.R;
+import com.example.android.newsfeed.utils.Constants;
+import com.example.android.newsfeed.utils.QueryUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,20 +62,35 @@ import java.util.TimeZone;
  * ( a list of {@link News} objects).
  */
 
+<<<<<<< Updated upstream
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private Context mContext;
     private List<News> mNewsList;
+=======
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> implements Filterable {
+    private Context mContext;
+    private List<News> mNewsList;
+    private List<News> mNewsListOld;
+
+>>>>>>>
+    Stashed changes
     private SharedPreferences sharedPrefs;
 
     /**
      * Constructs a new {@link NewsAdapter}
-     * @param context of the app
+     *
+     * @param context  of the app
      * @param newsList is the list of news, which is the data source of the adapter
      */
     public NewsAdapter(Context context, List<News> newsList) {
         mContext = context;
         mNewsList = newsList;
+<<<<<<<Updated upstream
+=======
+        mNewsListOld = newsList;
+>>>>>>>Stashed changes
     }
+
 
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -185,7 +204,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         if (colorTheme.equals(mContext.getString(R.string.settings_color_white_value))) {
             holder.titleTextView.setBackgroundResource(R.color.white);
             holder.titleTextView.setTextColor(Color.BLACK);
-        }else if (colorTheme.equals(mContext.getString(R.string.settings_color_sky_blue_value))) {
+        } else if (colorTheme.equals(mContext.getString(R.string.settings_color_sky_blue_value))) {
             holder.titleTextView.setBackgroundResource(R.color.nav_bar_start);
             holder.titleTextView.setTextColor(Color.WHITE);
         } else if (colorTheme.equals(mContext.getString(R.string.settings_color_dark_blue_value))) {
@@ -213,7 +232,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 mContext.getString(R.string.settings_text_size_default));
 
         // Change text size of TextView by using the user's stored preferences
-        if(textSize.equals(mContext.getString(R.string.settings_text_size_medium_value))) {
+        if (textSize.equals(mContext.getString(R.string.settings_text_size_medium_value))) {
             holder.titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     mContext.getResources().getDimension(R.dimen.sp22));
             holder.sectionTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -224,7 +243,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     mContext.getResources().getDimension(R.dimen.sp14));
             holder.dateTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     mContext.getResources().getDimension(R.dimen.sp14));
-        } else if(textSize.equals(mContext.getString(R.string.settings_text_size_small_value))) {
+        } else if (textSize.equals(mContext.getString(R.string.settings_text_size_small_value))) {
             holder.titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     mContext.getResources().getDimension(R.dimen.sp20));
             holder.sectionTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -235,7 +254,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     mContext.getResources().getDimension(R.dimen.sp12));
             holder.dateTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     mContext.getResources().getDimension(R.dimen.sp12));
-        } else if(textSize.equals(mContext.getString(R.string.settings_text_size_large_value))) {
+        } else if (textSize.equals(mContext.getString(R.string.settings_text_size_large_value))) {
             holder.titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     mContext.getResources().getDimension(R.dimen.sp24));
             holder.sectionTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -251,6 +270,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Share the article with friends in social network
+     *
      * @param news {@link News} object
      */
     private void shareData(News news) {
@@ -263,7 +283,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     *  Clear all data (a list of {@link News} objects)
+     * Clear all data (a list of {@link News} objects)
      */
     public void clearAll() {
         mNewsList.clear();
@@ -272,6 +292,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Add  a list of {@link News}
+     *
      * @param newsList is the list of news, which is the data source of the adapter
      */
     public void addAll(List<News> newsList) {
@@ -316,6 +337,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Get the formatted web publication date string in milliseconds
+     *
      * @param formattedDate the formatted web publication date string
      * @return the formatted web publication date in milliseconds
      */
@@ -337,6 +359,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Get the time difference between the current date and web publication date
+     *
      * @param formattedDate the formatted web publication date string
      * @return time difference (i.e "9 hours ago")
      */
@@ -345,5 +368,28 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         long publicationTime = getDateInMillis(formattedDate);
         return DateUtils.getRelativeTimeSpanString(publicationTime, currentTime,
                 DateUtils.SECOND_IN_MILLIS);
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                Uri baseUri = Uri.parse(Constants.NEWS_REQUEST_URL);
+                Uri.Builder uriBuilder = baseUri.buildUpon();
+                List<News> newsData = QueryUtils.fetchNewsData(String.valueOf(uriBuilder.appendQueryParameter(QUERY_PARAM, strSearch)));
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = newsData;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mNewsList = (List<News>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

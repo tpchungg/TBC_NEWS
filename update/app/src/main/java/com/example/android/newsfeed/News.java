@@ -50,6 +50,10 @@ public class News {
 
     /** TrailText of the article with string type Html */
     private String mTrailTextHtml;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
     /**
      * Constructs a new {@link News} object.

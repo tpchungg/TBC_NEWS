@@ -26,6 +26,7 @@ package com.example.android.newsfeed.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.loader.content.Loader;
 import android.util.Log;
 
