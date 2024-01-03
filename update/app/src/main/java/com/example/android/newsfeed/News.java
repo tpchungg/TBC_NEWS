@@ -28,7 +28,7 @@ public class News  implements Serializable {
 
     /** TrailText of the article with string type Html */
     private String mTrailTextHtml;
-    private String mquery;
+    private String mId;
 
     /**
      * Constructs a new {@link News} object.
@@ -41,7 +41,7 @@ public class News  implements Serializable {
      * @param thumbnail is the thumbnail of the article
      * @param trailText is trail text of the article with string type Html
      */
-    public News(String title, String section, String author, String date, String url, String thumbnail, String trailText) {
+    public News(String id, String title, String section, String author, String date, String url, String thumbnail, String trailText) {
         mTitle = title;
         mSection = section;
         mAuthor = author;
@@ -49,6 +49,7 @@ public class News  implements Serializable {
         mUrl = url;
         mThumbnail = thumbnail;
         mTrailTextHtml = trailText;
+        mId = id;
     }
 
     /**
@@ -97,5 +98,8 @@ public class News  implements Serializable {
      */
     public String getTrailTextHtml() {
         return mTrailTextHtml;
+    }
+    public String getId() {
+        return mId;
     }
 }

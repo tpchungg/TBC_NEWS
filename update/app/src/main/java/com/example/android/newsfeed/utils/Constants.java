@@ -38,6 +38,7 @@ public class Constants {
     }
 
     /**  Extract the key associated with the JSONObject */
+    static final String JSON_KEY_ID = "id";
     static final String JSON_KEY_RESPONSE = "response";
     static final String JSON_KEY_RESULTS = "results";
     static final String JSON_KEY_WEB_TITLE = "webTitle";
@@ -86,7 +87,7 @@ public class Constants {
     public static final String SHOW_TAGS = "contributor";
 
     /** API Key */
-    public static final String API_KEY = "042630b4-58f3-476a-b84b-49a344f8c5e1"; // Use your API Key when API rate limit exceeded
+    public static final String API_KEY = "042630b4-58f3-476a-b84b-49a344f8c5e1";
 
     /** Default number to set the image on the top of the textView */
     public static final int DEFAULT_NUMBER = 0;

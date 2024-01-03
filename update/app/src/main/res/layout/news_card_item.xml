@@ -77,9 +77,24 @@
                     android:id="@+id/date_card"
                     style="@style/DateTextViewStyle"
                     android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/share_image_card"
+                    android:layout_toStartOf="@+id/bookmark_image_card"
                     tools:text="date" />
-
+                <ImageView
+                    android:id="@+id/bookmark_image_card"
+                    android:layout_width="@dimen/image_share"
+                    android:layout_height="@dimen/image_share"
+                    android:layout_marginEnd="@dimen/layout_margin"
+                    android:layout_toStartOf="@+id/comment_image_card"
+                    android:contentDescription="@string/image_des_ic_share"
+                    android:src="@drawable/ic_bookmark" />
+                <ImageView
+                    android:id="@+id/comment_image_card"
+                    android:layout_width="@dimen/image_share"
+                    android:layout_height="@dimen/image_share"
+                    android:layout_marginEnd="@dimen/layout_margin"
+                    android:layout_toStartOf="@+id/share_image_card"
+                    android:contentDescription="@string/image_des_ic_share"
+                    android:src="@drawable/ic_comment" />
                 <ImageView
                     android:id="@+id/share_image_card"
                     android:layout_width="@dimen/image_share"
