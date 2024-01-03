@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,10 +43,10 @@ public class MyProfile extends AppCompatActivity {
     FirebaseFirestore db;  // Declare the variable here
 
     ProgressDialog progressDialog;
-EditText edt_Name, edt_Phone;
+EditText edt_Name, edt_Phone,edt_PassWord;
 TextView Text_email;
 
-Button btnUpdateProfile,btnBackMain;
+Button btnUpdateProfile,btnUpdatePassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,28 +54,63 @@ Button btnUpdateProfile,btnBackMain;
         edt_Name=findViewById(R.id.edt_full_name);
         Text_email=findViewById(R.id.edt_email);
         edt_Phone=findViewById(R.id.edt_phone);
+        edt_PassWord=findViewById(R.id.edt_resetPassword);
         img_avatar=(ImageView) findViewById(R.id.img_avatar);
         btnUpdateProfile=findViewById(R.id.btn_update);
-        btnBackMain=findViewById(R.id.btn_back);
+        btnUpdatePassword=findViewById(R.id.btn_Password);
         progressDialog=new ProgressDialog(this);
         db= FirebaseFirestore.getInstance();
 
 
         //Bắt sự kiện set thông tin
         setUserInformation();
-        //Back về main activity
-        btnBackMain.setOnClickListener(new View.OnClickListener() {
+        //ChangePassWord
+        btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MyProfile.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                updatePassWord();
             }
         });
         //Bắt sự kiện update
         initListener();
     }
+    //Change Password
+    private void updatePassWord() {
+        String strnewPassword = edt_PassWord.getText().toString().trim();
+        progressDialog.show();
+if(strnewPassword.isEmpty()){
+    progressDialog.dismiss();
+    Toast.makeText(MyProfile.this, "Nhập mật khẩu mới",
+            Toast.LENGTH_SHORT).show();
+    return;
+}else{
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user.updatePassword(strnewPassword)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
 
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            Toast.makeText(MyProfile.this, "Cập nhật mật khẩu mới thành công",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MyProfile.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                        else{
+                            progressDialog.dismiss();
+                            Intent intent = new Intent(MyProfile.this, MainActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(MyProfile.this, "Cập nhật thành công",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+    }}
 
 
     //Set thông tin user hiện tại

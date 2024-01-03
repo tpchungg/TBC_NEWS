@@ -30,6 +30,14 @@
         android:padding="10dp"
         android:hint="Email"/>
     <EditText
+        android:id="@+id/edt_resetPassword"
+        android:inputType="textWebPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:hint="New Password"/>
+    <EditText
         android:id="@+id/edt_phone"
         android:inputType="phone"
         android:layout_width="match_parent"
@@ -49,13 +57,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update Profile" />
-
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_Password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Back" />
+            android:text="Change Password"
+            android:layout_marginLeft="20dp"/>
+
     </LinearLayout>
+
 
 </LinearLayout>
