@@ -6,7 +6,6 @@
     style="@style/loginParent">
     <ScrollView
         style="@style/parent">
-
         <RelativeLayout
             style="@style/parent">
 
@@ -40,8 +39,6 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp">
-
-
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
@@ -58,9 +55,6 @@
                     android:layout_marginTop="@dimen/loginViewsMargin"
                     android:layout_marginBottom="@dimen/loginViewsMargin"
                     android:background="@color/whiteCardColor">
-
-
-
                     <LinearLayout
                         style="@style/linearParent"
                         android:layout_gravity="center"
@@ -82,7 +76,6 @@
                                 android:maxLines="1"
                                 android:hint="@string/login_email_hint"/>
                         </com.google.android.material.textfield.TextInputLayout>
-
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputPassword"
                             style="@style/parent"
