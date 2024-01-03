@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+
     style="@style/loginParent">
     <ScrollView
         style="@style/parent">
@@ -123,4 +124,4 @@
 
     </ScrollView>
 
-</RelativeLayout>
+
