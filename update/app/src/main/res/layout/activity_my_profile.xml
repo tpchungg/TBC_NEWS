@@ -1,70 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center"
-    >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_avatar"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/ic_avatar_default"/>
+    style="@style/loginParent">
+    <ScrollView
+        style="@style/parent">
+        <RelativeLayout
+            style="@style/parent">
 
-    <EditText
-        android:id="@+id/edt_full_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:hint="Name"/>
-    <TextView
-        android:id="@+id/edt_email"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:hint="Email"/>
-    <EditText
-        android:id="@+id/edt_resetPassword"
-        android:inputType="textWebPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:hint="New Password"/>
-    <EditText
-        android:id="@+id/edt_phone"
-        android:inputType="phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:hint="Phone"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:weightSum="12">
 
-        <Button
-            android:id="@+id/btn_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update Profile" />
-        <Button
-            android:id="@+id/btn_Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change Password"
-            android:layout_marginLeft="20dp"/>
+                <LinearLayout
+                    style="@style/parent"
+                    android:background="@drawable/login_shape_bk"
+                    android:orientation="vertical"
+                    android:layout_weight="3">
 
-    </LinearLayout>
+                    <ImageView
+                        style="@style/parent"
+                        android:background="@drawable/ic_login_bk"
+                        android:contentDescription="login background" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp">
+                <TextView
+                    style="@style/headerText"
+                    android:layout_gravity="center"
+                    android:text="TBC NEWS"
+                    android:textSize="40dp"
+                    android:layout_marginTop="40dp"/>
+                <androidx.cardview.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    style="@style/loginCard"
+                    app:cardCornerRadius="@dimen/loginCardRadius"
+                    android:elevation="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:layout_marginBottom="@dimen/loginViewsMargin"
+                    android:background="@color/whiteCardColor">
+                    <LinearLayout
+                        style="@style/linearParent"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/loginViewsMargin">
+                        <Button
+                            android:id="@+id/btn_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:layout_marginLeft="-20dp"
+                            android:textColor="@color/black"
+                            android:drawableLeft="@drawable/ic_back"
+                            android:text="Back" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_avatar"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/ic_avatar_default"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputFullName"
+                            style="@style/parent"
+                            android:layout_marginTop="@dimen/loginViewsMargin">
+                                <EditText
+                                    android:id="@+id/edt_full_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    style="@style/modifiedEditText"
+                                    android:hint="Name"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputEmail"
+                            style="@style/parent"
+                            android:layout_marginTop="@dimen/loginViewsMargin">
+                                <EditText
+                                    android:id="@+id/edt_email"
+                                    android:inputType="textEmailAddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    style="@style/modifiedEditText"
+                                    android:hint="Email"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputPhone"
+                            style="@style/parent"
+                            android:layout_marginTop="@dimen/loginViewsMargin">
+                                <EditText
+                                    android:id="@+id/edt_phone"
+                                    android:inputType="phone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    style="@style/modifiedEditText"
+                                    android:hint="Phone"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                                <Button
+                                    android:id="@+id/btn_update"
+                                    style="@style/loginButton"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/loginViewsMargin"
+                                    android:text="Update Profile" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 
 
-</LinearLayout>

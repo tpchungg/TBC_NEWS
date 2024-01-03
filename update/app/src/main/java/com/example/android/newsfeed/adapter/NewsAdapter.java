@@ -1,5 +1,3 @@
-
-
 package com.example.android.newsfeed.adapter;
 
 import android.content.Context;
@@ -39,11 +37,9 @@ import java.util.TimeZone;
  * ( a list of {@link News} objects).
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> implements Filterable {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private Context mContext;
     private List<News> mNewsList;
-
-    private List<News> mNewsList1;
     private SharedPreferences sharedPrefs;
 
 
@@ -55,7 +51,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> im
     public NewsAdapter(Context context, List<News> newsList) {
         mContext = context;
         mNewsList = newsList;
-        mNewsList1= newsList;
     }
 
     @Override
@@ -333,36 +328,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> im
         long publicationTime = getDateInMillis(formattedDate);
         return DateUtils.getRelativeTimeSpanString(publicationTime, currentTime,
                 DateUtils.SECOND_IN_MILLIS);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String strSearch = constraint.toString();
-                if(strSearch.isEmpty()){
-                    mNewsList = mNewsList1;
-                }
-                else{
-                    List<News> list = new ArrayList<News>();
-                    for(News news : mNewsList1){
-                        if(news.getTitle().toLowerCase().contains(strSearch.toLowerCase())){
-                            list.add(news);
-                        }
-                    }
-                    mNewsList = list;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = mNewsList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mNewsList = (List<News>) results.values;
-                notifyDataSetChanged();
-            }
-        };
     }
 }
