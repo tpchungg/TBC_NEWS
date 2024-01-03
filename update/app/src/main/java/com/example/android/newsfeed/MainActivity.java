@@ -160,8 +160,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         }else if(id==R.id.nav_my_profile){
-            viewPager.setCurrentItem(Constants.PROFILE);
-
+            Intent intent =new Intent(this, MyProfile.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
