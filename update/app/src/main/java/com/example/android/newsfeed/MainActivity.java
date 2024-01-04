@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -76,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         tvName=navigationView.getHeaderView(0).findViewById(R.id.textViewName);
         showUserInformation();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity
             }else{
                 tvName.setVisibility(View.VISIBLE);
                 tvName.setText(name);}
-            Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar_default).into(imgAvatar);       // Check if user's email is verified
-
+            Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar_default).into(imgAvatar);
+            // Check if user's email is verified
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.

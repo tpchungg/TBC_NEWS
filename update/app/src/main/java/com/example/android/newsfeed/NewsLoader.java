@@ -9,21 +9,21 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Loads a list of news by using an AsyncTask to perform the network request to the given URL.
+ * Tải danh sách tin tức bằng cách sử dụng AsyncTask để thực hiện yêu cầu mạng tới URL đã cho.
  */
 public class NewsLoader extends AsyncTaskLoader<List<News>> implements Serializable {
 
-    /** Tag for log messages */
+    /** Log tag */
     private static final String LOG_TAG = NewsLoader.class.getName();
 
-    /** Query URL */
+    /** URL */
     private String mUrl;
 
     /**
-     * Constructs a new {@link NewsLoader}.
+     * AA {@link NewsLoader}.
      *
-     * @param context of the activity
-     * @param url to load data from
+     * @param context
+     * @param url
      */
     public NewsLoader(Context context, String url) {
         super(context);
@@ -32,12 +32,12 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> implements Serializa
 
     @Override
     protected void onStartLoading() {
-        // Trigger the loadInBackground() method to execute.
+        // Kích hoạt phương thức LoadInBackground() để thực thi.
         forceLoad();
     }
 
     /**
-     * This is on a background thread.
+     * background thread.
      */
     @Override
     public List<News> loadInBackground() {
@@ -45,7 +45,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> implements Serializa
             return null;
         }
 
-        // Perform the network request, parse the response, and extract a list of news.
+        // Thực hiện yêu cầu mạng, phân tích phản hồi và trích xuất danh sách tin tức
         List<News> newsData = QueryUtils.fetchNewsData(mUrl);
         return newsData;
     }

@@ -2,6 +2,8 @@ package com.example.android.newsfeed.adapter;
 
 import static android.content.Intent.ACTION_VIEW;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +27,10 @@ import com.bumptech.glide.Glide;
 import com.example.android.newsfeed.DetailNews;
 import com.example.android.newsfeed.MainActivity;
 import com.example.android.newsfeed.News;
+import com.example.android.newsfeed.NewsPreferences;
 import com.example.android.newsfeed.R;
+import com.example.android.newsfeed.utils.QueryUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,7 +45,7 @@ import java.util.TimeZone;
  * (danh sách các đối tượng {@link News}).
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>  {
     private Context mContext;
     private List<News> mNewsList;
     private SharedPreferences sharedPrefs;
@@ -120,12 +125,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//           Convert the String URL into a URI object (to pass into the Intent constructor)
+//           Chuyển đổi URL chuỗi thành đối tượng URI (để chuyển vào hàm tạo Intent)
                 Uri newsUri = Uri.parse(currentNews.getUrl());
-
-//                 Create a new intent to view the news URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
-
 //                 Chuyển tab sang trang đọc báo
                 mContext.startActivity(websiteIntent);
 //                Intent intent = new Intent(mContext, DetailNews.class);

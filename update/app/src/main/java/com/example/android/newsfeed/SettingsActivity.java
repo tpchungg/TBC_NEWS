@@ -31,10 +31,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * The NewsPreferenceFragment implements the Preference.OnPreferenceChangeListener interface
-     * to set up to listen for any Preference changes made by the user.
-     * And the NewsPreferenceFragment also implements the DatePickerDialog.OnDateSetListener to
-     * receive a callback when the user has finished selecting a date.
+     * NewsPreferenceFragment triển khai giao diện Preference.OnPreferenceChangeListener
+     * để thiết lập để lắng nghe mọi thay đổi Tùy chọn do người dùng thực hiện.
+     * Và NewsPreferenceFragment cũng triển khai DatePickerDialog.OnDateSetListener để
+     * nhận được cuộc gọi lại khi người dùng chọn ngày xong.
      */
     public static class NewsPreferenceFragment extends PreferenceFragment
             implements Preference.OnPreferenceChangeListener, DatePickerDialog.OnDateSetListener {
@@ -44,40 +44,40 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            // Find the preference for number of items
+            // Tìm ưu tiên cho số lượng item
             Preference numOfItems = findPreference(getString(R.string.settings_number_of_items_key));
-            // bind the current preference value to be displayed
+            // liên kết giá trị ưu tiên hiện tại sẽ được hiển thị
             bindPreferenceSummaryToValue(numOfItems);
 
-            // Find the "order by" Preference object according to its key
+            // Tìm đối tượng ưu tiên "order_by" theo khóa của nó
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
-            // Update the summary so that it displays the current value stored in SharedPreferences
+            //Cập nhật bản tóm tắt để nó hiển thị giá trị hiện tại được lưu trữ trong SharedPreferences
             bindPreferenceSummaryToValue(orderBy);
 
-            // Find the "order date" Preference object according to its key
+            // Tìm đối tượng ưu tiên "order_date" theo khóa của nó
             Preference orderDate = findPreference(getString(R.string.settings_order_date_key));
-            // Update the summary so that it displays the current value stored in SharedPreferences
+            // Cập nhật bản tóm tắt để nó hiển thị giá trị hiện tại được lưu trữ trong SharedPreferences
             bindPreferenceSummaryToValue(orderDate);
 
-            // Find the "color theme" Preference object according to its key
+            // Tìm đối tượng ưu tiên "color_theme" theo khóa của nó
             Preference colorTheme = findPreference(getString(R.string.settings_color_key));
-            // Update the summary so that it displays the current value stored in SharedPreferences
+            // Cập nhật bản tóm tắt để nó hiển thị giá trị hiện tại được lưu trữ trong SharedPreferences
             bindPreferenceSummaryToValue(colorTheme);
 
-            // Find the "text size" Preference object according to its key
+            // Tìm đối tượng ưu tiên "text size" theo khóa của nó
             Preference textSize = findPreference(getString(R.string.settings_text_size_key));
-            // Update the summary so that it displays the current value stored in SharedPreferences
+            //Cập nhật bản tóm tắt để nó hiển thị giá trị hiện tại được lưu trữ trong SharedPreferences
             bindPreferenceSummaryToValue(textSize);
 
             // Find the "from date" Preference object according to its key
             Preference fromDate = findPreference(getString(R.string.settings_from_date_key));
             setOnPreferenceClick(fromDate);
-            // bind the current preference value to be displayed
+            //liên kết giá trị ưu tiên hiện tại sẽ được hiển thị
             bindPreferenceSummaryToValue(fromDate);
         }
 
         /**
-         * This method is called when the user has clicked a Preference.
+         * Phương thức này được gọi khi người dùng nhấn vào một Preference.
          */
         private void setOnPreferenceClick(Preference preference) {
             preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -93,7 +93,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         /**
-         * Show the current date as the default date in the picker
+         * Hiển thị ngày hiện tại làm ngày mặc định trong bộ chọn
          */
         private void showDatePicker() {
             Calendar calendar = Calendar.getInstance();
@@ -106,19 +106,18 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-            // Since it starts counting the months from 0, add one to the month value.
+            //Vì nó bắt đầu đếm các tháng từ 0 nên hãy thêm một vào giá trị tháng.
             month = month + 1;
-            // Date the user selected
+            // Ngày người dùng đã chọn
             String selectedDate = year + "-" + month + "-" + dayOfMonth;
-            // Convert selected date string(i.e. "2017-2-1" into formatted date string(i.e. "2017-02-01")
+            //Chuyển đổi chuỗi ngày đã chọn (tức là "2023-10-1" thành chuỗi ngày được định dạng (tức là "2023-10-01")
             String formattedDate = formatDate(selectedDate);
-
-            // Storing selected date
+            // Lưu trữ ngày đã chọn
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(getString(R.string.settings_from_date_key), formattedDate).apply();
 
-            // Update the displayed preference summary after it has been changed
+            //Cập nhật tóm tắt tùy chọn được hiển thị sau khi nó được thay đổi
             Preference fromDatePreference = findPreference(getString(R.string.settings_from_date_key));
             bindPreferenceSummaryToValue(fromDatePreference);
         }

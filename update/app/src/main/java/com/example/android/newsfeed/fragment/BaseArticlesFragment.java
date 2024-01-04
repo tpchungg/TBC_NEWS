@@ -142,13 +142,13 @@ public class BaseArticlesFragment extends Fragment
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
-        // Loader reset, so we can clear out our existing data.
+        //Thiết lập lại
         mAdapter.clearAll();
     }
 
     /**
-     * When the user returns to the previous screen by pressing the up button in the SettingsActivity,
-     * restart the Loader to reflect the current value of the preference.
+     * Khi người dùng quay lại màn hình trước bằng cách nhấn nút SettingsActivity,
+     * khởi động lại Trình tải để phản ánh giá trị hiện tại của tùy chọn.
      */
     @Override
     public void onResume() {
@@ -171,11 +171,11 @@ public class BaseArticlesFragment extends Fragment
     }
 
     /**
-     * If there is internet connectivity, initialize the loader as
-     * usual. Otherwise, hide loading indicator and set empty state TextView to display
-     * "No internet connection."
+     * Nếu có kết nối internet, hãy khởi tạo trình tải dưới dạng
+     * thường. Nếu không, hãy ẩn chỉ báo tải và đặt TextView ở trạng thái trống để hiển thị
+     * "Không có kết nối Internet."
      *
-     * @param isConnected internet connection is available or not
+     * @param isConnected kết nối internet có sẵn hay không
      */
     private void initializeLoader(boolean isConnected) {
         if (isConnected) {
@@ -195,8 +195,8 @@ public class BaseArticlesFragment extends Fragment
     }
 
     /**
-     * Restart the loader if there is internet connectivity.
-     * @param isConnected internet connection is available or not
+     * Khởi động lại bộ nạp nếu có kết nối internet.
+     * @param isConnected kết nối internet có sẵn hay không
      */
     private void restartLoader(boolean isConnected) {
         if (isConnected) {
@@ -219,7 +219,7 @@ public class BaseArticlesFragment extends Fragment
     }
 
     /**
-     * When the user performs a swipe-to-refresh gesture, restart the loader.
+     * Khi người dùng thực hiện cử chỉ vuốt để làm mới, hãy khởi động lại trình tải.
      */
     private void initiateRefresh() {
         restartLoader(isConnected());

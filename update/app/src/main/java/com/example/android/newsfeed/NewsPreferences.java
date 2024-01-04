@@ -25,41 +25,35 @@ import static com.example.android.newsfeed.utils.Constants.SHOW_TAGS_PARAM;
 public final class NewsPreferences {
 
     /**
-     * Get Uri.Builder based on stored SharedPreferences.
-     * @param context Context used to access SharedPreferences
+     * Lấy Uri.Builder dựa trên SharedPreferences được lưu trữ.
+     * @param context Context được sử dụng để truy cập SharedPreferences
      * @return Uri.Builder
      */
     public static Uri.Builder getPreferredUri(Context context) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        // getString retrieves a String value from the preferences. The second parameter is the
-        // default value for this preference.
+        // getString lấy giá trị Chuỗi từ tùy chọn. Tham số thứ hai là
+        // giá trị mặc định cho tùy chọn này.
         String numOfItems = sharedPrefs.getString(
                 context.getString(R.string.settings_number_of_items_key),
                 context.getString(R.string.settings_number_of_items_default));
-
-        // Get the information from SharedPreferences and check for the value associated with the key
+        // Nhận thông tin từ SharedPreferences và kiểm tra giá trị được liên kết với khóa
         String orderBy = sharedPrefs.getString(
                 context.getString(R.string.settings_order_by_key),
                 context.getString(R.string.settings_order_by_default));
-
-        // Get the orderDate information from SharedPreferences and check for the value associated with the key
+        //Nhận thông tin orderDate từ SharedPreferences và kiểm tra giá trị được liên kết với khóa
         String orderDate = sharedPrefs.getString(
                 context.getString(R.string.settings_order_date_key),
                 context.getString(R.string.settings_order_date_default));
-
-        // Get the fromDate information from SharedPreferences and check for the value associated with the key
+        //Nhận thông tin fromDate từ SharedPreferences và kiểm tra giá trị được liên kết với khóa
         String fromDate = sharedPrefs.getString(
                 context.getString(R.string.settings_from_date_key),
                 context.getString(R.string.settings_from_date_default));
-
-        // Parse breaks apart the URI string that is passed into its parameter
+        // Phân tích cú pháp tách chuỗi URI được truyền vào tham số của nó
         Uri baseUri = Uri.parse(Constants.NEWS_REQUEST_URL);
-
-        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+        //buildUpon chuẩn bị baseUri mà chúng ta vừa phân tích cú pháp để có thể thêm tham số truy vấn vào đó
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        // Append query parameter and its value. (e.g. the 'show-tag=contributor')
+        // Nối tham số truy vấn và giá trị của nó. (vd: the 'show-tag=contributor')
         uriBuilder.appendQueryParameter(QUERY_PARAM, "");
         uriBuilder.appendQueryParameter(ORDER_BY_PARAM, orderBy);
         uriBuilder.appendQueryParameter(PAGE_SIZE_PARAM, numOfItems);
@@ -74,8 +68,8 @@ public final class NewsPreferences {
     }
 
     /**
-     * Returns String Url for query
-     * @param context Context used to access getPreferredUri method
+     * Trả về chuỗi Url cho truy vấn
+     * @param context Context được sử dụng để truy cập phương thức getPreferredUri
      * @param section News section
      */
     public static String getPreferredUrl(Context context, String section) {
