@@ -1,5 +1,7 @@
 package com.example.android.newsfeed.adapter;
 
+import static android.content.Intent.ACTION_VIEW;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,11 +21,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
+import com.example.android.newsfeed.DetailNews;
+import com.example.android.newsfeed.MainActivity;
 import com.example.android.newsfeed.News;
 import com.example.android.newsfeed.R;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,8 +35,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * A {@link NewsAdapter} can provide a card item layout for each news in the data source
- * ( a list of {@link News} objects).
+ *
+ * {@link NewsAdapter} có thể cung cấp bố cục card item cho từng tin tức trong nguồn dữ liệu
+ * (danh sách các đối tượng {@link News}).
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
@@ -44,9 +47,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
 
     /**
-     * Constructs a new {@link NewsAdapter}
-     * @param context of the app
-     * @param newsList is the list of news, which is the data source of the adapter
+     * Xây dựng một {@link NewsAdapter} mới
+     * @param context cho app
+     * @param newsList là danh sách tin tức, là nguồn dữ liệu của adapter
      */
     public NewsAdapter(Context context, List<News> newsList) {
         mContext = context;
@@ -81,9 +84,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             sectionTextView = itemView.findViewById(R.id.section_card);
             authorTextView = itemView.findViewById(R.id.author_card);
             dateTextView = itemView.findViewById(R.id.date_card);
-            thumbnailImageView = itemView.findViewById(R.id.thumbnail_image_card); // ? What's it?
-            shareImageView = itemView.findViewById(R.id.share_image_card); // What's it?
-            trailTextView = itemView.findViewById(R.id.trail_text_card); // What's it?
+            thumbnailImageView = itemView.findViewById(R.id.thumbnail_image_card);
+            shareImageView = itemView.findViewById(R.id.share_image_card);
+            trailTextView = itemView.findViewById(R.id.trail_text_card);
             cardView = itemView.findViewById(R.id.card_view);
         }
     }
@@ -91,47 +94,48 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-
-        // Change the color theme of Title TextView by using the user's stored preferences
         setColorTheme(holder);
-
-        // Change text size of TextView by using the user's stored preferences
         setTextSize(holder);
 
-        // Find the current news that was clicked on
+        // Tìm tin tức hiện tại khi được nhấp vào
         final News currentNews = mNewsList.get(position);
 
         holder.titleTextView.setText(currentNews.getTitle());
         holder.sectionTextView.setText(currentNews.getSection());
-        // If the author does not exist, hide the authorTextView
+        //Nếu tác giả không tồn tại,ẩn tác giả ở TextView
         if (currentNews.getAuthor() == null) {
             holder.authorTextView.setVisibility(View.GONE);
         } else {
             holder.authorTextView.setVisibility(View.VISIBLE);
             holder.authorTextView.setText(currentNews.getAuthor());
         }
-
-        // Get time difference between the current date and web publication date and
-        // set the time difference on the textView
+        // Lấy chênh lệch thời gian giữa ngày hiện tại và ngày xuất bản web và
+        // đặt chênh lệch thời gian trên textView
         holder.dateTextView.setText(getTimeDifference(formatDate(currentNews.getDate())));
-
-        // Get string of the trailTextHTML and convert Html text to plain text
-        // and set the plain text on the textView
+        // Lấy chuỗi TrailTextHTML và chuyển đổi văn bản Html thành văn bản
+        // và đặt văn bản trên textView
         String trailTextHTML = currentNews.getTrailTextHtml();
         holder.trailTextView.setText(Html.fromHtml(Html.fromHtml(trailTextHTML).toString()));
-
-//         Set an OnClickListener to open a website with more information about the selected article
+//         Đặt OnClickListener để mở trang web có thêm thông tin về bài viết đã chọn
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
+//           Convert the String URL into a URI object (to pass into the Intent constructor)
                 Uri newsUri = Uri.parse(currentNews.getUrl());
 
-                // Create a new intent to view the news URI
+//                 Create a new intent to view the news URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
 
-                // Send the intent to launch a new activity
+//                 Chuyển tab sang trang đọc báo
                 mContext.startActivity(websiteIntent);
+//                Intent intent = new Intent(mContext, DetailNews.class);
+//
+//                // Thêm dữ liệu nếu cần thiết
+//                intent.putExtra("data", currentNews);
+//
+//                // Mở Activity mới bằng Intent
+//                mContext.startActivity(intent);
+
             }
         });
 
@@ -233,7 +237,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     * Share the article with friends in social network
+     * Share
      * @param news {@link News} object
      */
     private void shareData(News news) {
@@ -246,7 +250,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     *  Clear all data (a list of {@link News} objects)
+     *  Clear
      */
     public void clearAll() {
         mNewsList.clear();
@@ -254,8 +258,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     * Add  a list of {@link News}
-     * @param newsList is the list of news, which is the data source of the adapter
+     * Add
      */
     public void addAll(List<News> newsList) {
         mNewsList.clear();

@@ -37,7 +37,7 @@ public class Constants {
     private Constants() {
     }
 
-    /**  Extract the key associated with the JSONObject */
+    /**  Trích xuất khóa được liên kết với JSONObject */
     static final String JSON_KEY_ID = "id";
     static final String JSON_KEY_RESPONSE = "response";
     static final String JSON_KEY_RESULTS = "results";
@@ -50,22 +50,22 @@ public class Constants {
     static final String JSON_KEY_THUMBNAIL = "thumbnail";
     static final String JSON_KEY_TRAIL_TEXT = "trailText";
 
-    /** Read timeout for setting up the HTTP request */
+    /**Thời gian chờ đọc để thiết lập yêu cầu HTTP */
     static final int READ_TIMEOUT = 10000; /* milliseconds */
 
-    /** Connect timeout for setting up the HTTP request */
+    /**Hết thời gian kết nối để thiết lập yêu cầu HTTP */
     static final int CONNECT_TIMEOUT = 15000; /* milliseconds */
 
-    /** HTTP response code when the request is successful */
+    /** Mã phản hồi HTTP khi yêu cầu thành công */
     static final int SUCCESS_RESPONSE_CODE = 200;
 
-    /** Request method type "GET" for reading information from the server */
+    /**Loại phương thức yêu cầu "GET" để đọc thông tin từ máy chủ */
     static final String REQUEST_METHOD_GET = "GET";
 
-    /** URL for news data from the guardian data set */
+    /** URL cho dữ liệu tin tức từ tập dữ liệu người giám hộ */
     public static final String NEWS_REQUEST_URL = "https://content.guardianapis.com/search";
 
-    /** Parameters */
+    /**Thông số */
     public static final String QUERY_PARAM = "q";
     public static final String ORDER_BY_PARAM = "order-by";
     public static final String PAGE_SIZE_PARAM = "page-size";
@@ -89,7 +89,7 @@ public class Constants {
     /** API Key */
     public static final String API_KEY = "042630b4-58f3-476a-b84b-49a344f8c5e1";
 
-    /** Default number to set the image on the top of the textView */
+    /** Số mặc định để đặt hình ảnh ở đầu textView */
     public static final int DEFAULT_NUMBER = 0;
 
     /** Constants value for each fragment */

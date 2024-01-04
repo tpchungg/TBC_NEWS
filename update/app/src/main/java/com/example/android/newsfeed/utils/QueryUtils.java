@@ -1,27 +1,3 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Soojeong Shin
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package com.example.android.newsfeed.utils;
 
 import android.text.TextUtils;
@@ -45,43 +21,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving news data from Guardian.
+ * Class dùng để yêu cầu và nhận dữ liệu tin tức từ Guardian.
  */
 public class QueryUtils {
-
-    /** Tag for the log messages */
+    /** Log tag */
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
-
-    /**
-     * Create a private constructor because no one should ever create a {@link QueryUtils} object.
-     */
     private QueryUtils() {
     }
 
     /**
-     * Query the Guardian data set and return a list of {@link News} objects.
+     * Truy vấn tập dữ liệu Guardian và trả về danh sách các đối tượng {@link News}
      */
     public static List<News> fetchNewsData(String requestUrl) {
-        // Create URL object
+        // Tạo đối tượng URL
         URL url = createUrl(requestUrl);
-
-        // Perform HTTP request to the URL and receive a JSON response back
+        // Thực hiện yêu cầu HTTP tới URL và nhận lại phản hồi JSON
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
-
-        // Extract relevant fields from the JSON response and create a list of {@link News}
+        // Trích xuất các trường có liên quan từ phản hồi JSON và tạo danh sách {@link News}
         List<News> newsList = extractFeatureFromJSON(jsonResponse);
-
-        // Return the list of {@link News}
+        //Trả về danh sách {@link News}
         return newsList;
     }
 
     /**
-     * Returns new URL object from the given string URL.
+     * Trả về đối tượng URL mới từ URL chuỗi đã cho.
      */
     private static URL createUrl(String stringUrl) {
         URL url = null;
@@ -113,8 +81,8 @@ public class QueryUtils {
             urlConnection.setRequestMethod(Constants.REQUEST_METHOD_GET);
             urlConnection.connect();
 
-            // If the request was successful (response code 200),
-            // then read the input stream and parse the response.
+            // Nếu yêu cầu thành công (mã phản hồi 200),
+            // Sau đó đọc luồng đầu vào và phân tích phản hồi.
             if (urlConnection.getResponseCode() == Constants.SUCCESS_RESPONSE_CODE) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);

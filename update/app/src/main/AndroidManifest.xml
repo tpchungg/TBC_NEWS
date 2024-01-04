@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".DetailNews"
+            android:exported="false" />
+        <activity
             android:name=".ForgotPassword"
             android:exported="false" />
         <activity
             android:name=".MyProfile"
-            android:exported="false" />
-        <activity
-            android:name=".DetailNews"
             android:exported="false" />
         <activity
             android:name=".SlashActivity"

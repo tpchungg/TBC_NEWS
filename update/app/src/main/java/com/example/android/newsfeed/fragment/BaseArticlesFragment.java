@@ -30,43 +30,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The BaseArticlesFragment is a {@link Fragment} subclass that implements the LoaderManager.LoaderCallbacks
- * interface in order for Fragment to be a client that interacts with the LoaderManager. It is
- * base class that is responsible for displaying a set of articles, regardless of type.
+ * BaseArticlesFragment là lớp con {@link Fragment} triển khai LoaderManager.LoaderCallbacks
+ * giao diện để Fragment trở thành ứng dụng client tương tác với LoaderManager. Nó là
+ * lớp cơ sở chịu trách nhiệm hiển thị một tập hợp các bài viết, bất kể loại nào.
  */
 public class BaseArticlesFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<News>>{
 
     private static final String LOG_TAG = BaseArticlesFragment.class.getName();
 
-    /** Constant value for the news loader ID. */
+    /** Giá trị không đổi cho ID news loader */
     private static final int NEWS_LOADER_ID = 1;
 
-    /** Adapter for the list of news */
+    /** Adapter cho danh sách tin tức */
     private NewsAdapter mAdapter;
 
-    /** TextView that is displayed when the recycler view is empty */
+    /** TextView hiển thị khi recycle view rỗng */
     private TextView mEmptyStateTextView;
 
-    /** Loading indicator that is displayed before the first load is completed */
+    /** Chỉ báo tải được hiển thị trước khi hoàn thành lần tải đầu tiên */
     private View mLoadingIndicator;
 
-    /** The {@link SwipeRefreshLayout} that detects swipe gestures and
-     * triggers callbacks in the app.
+
+    /** {@link SwipeRefreshLayout} phát hiện cử chỉ vuốt và
+     * kích hoạt callbacks trong ứng dụng.
      */
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        // Find a reference to the {@link RecyclerView} in the layout
-        // Replaced RecyclerView with EmptyRecyclerView
+        // Tìm tham chiếu đến {@link RecyclerView} trong bố cục
+        // Đã thay thế RecyclerView bằng EmptyRecyclerView
         EmptyRecyclerView mRecyclerView = rootView.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setHasFixedSize(true);
 
-        // Set the layoutManager on the {@link RecyclerView}
+        // Đặt layoutManager trên {@link RecyclerView}
         mRecyclerView.setLayoutManager(layoutManager);
 
         // Find the SwipeRefreshLayout
@@ -89,20 +89,19 @@ public class BaseArticlesFragment extends Fragment
             }
         });
 
-        // Find the loading indicator from the layout
+        //Tìm id báo tải từ layout
         mLoadingIndicator = rootView.findViewById(R.id.loading_indicator);
-
-        // Find the empty view from the layout and set it on the new recycler view
+        // Tìm empty view từ layout và đặt nó trên recycler view mới
         mEmptyStateTextView = rootView.findViewById(R.id.empty_view);
         mRecyclerView.setEmptyView(mEmptyStateTextView);
 
-        // Create a new adapter that takes an empty list of news as input
+        //Tạo một bộ adapter mới lấy danh sách tin tức trống làm đầu vào
         mAdapter = new NewsAdapter(getActivity(), new ArrayList<News>());
 
-        // Set the adapter on the {@link recyclerView}
+        // Tạo một adapter trên {@link recyclerView}
         mRecyclerView.setAdapter(mAdapter);
 
-        // Check for network connectivity and initialize the loader
+        // Kiểm tra kết nối mạng và khởi tạo trình tải
         initializeLoader(isConnected());
 
         return rootView;
@@ -116,7 +115,7 @@ public class BaseArticlesFragment extends Fragment
 
         Log.e(LOG_TAG,uriBuilder.toString());
 
-        // Create a new loader for the given URL
+        //Tạo NewsLoader cho URL đã cho
         return new NewsLoader(getActivity(), uriBuilder.toString());
     }
 

@@ -18,20 +18,21 @@ import com.example.android.newsfeed.fragment.WorldFragment;
 import com.example.android.newsfeed.utils.Constants;
 
 /**
- * Provides the appropriate {@link Fragment} for a view pager.
+ *
+ * Cung cấp {@link Fragment} thích hợp cho view pager.
  */
 
 public class CategoryFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    /** Context of the app */
+    /** Context của ứng dụng */
     private Context mContext;
 
     /**
-     * Create a new {@link CategoryFragmentPagerAdapter} object.
+     * Tạo một đối tượng {@link CategoryFragmentPagerAdapter}.
      *
-     * @param context is the context of the app
-     * @param fm is the fragment manager that will keep each fragment's state in the adapter
-     * across swipes.
+     * @param context là context của ứng dụng
+     * @param fm là trình quản lý phân đoạn sẽ giữ trạng thái của từng phân đoạn trong bộ chuyển đổi
+     * qua các lần vuốt.
      */
     public CategoryFragmentPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
@@ -39,7 +40,7 @@ public class CategoryFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Return the {@link Fragment} that should be displayed for the given page number.
+     * Trả về {@link Fragment} và sẽ được hiển thị cho số trang đã cho.
      */
     @Override
     public Fragment getItem(int position) {
@@ -68,7 +69,7 @@ public class CategoryFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Return the total number of pages.
+     * Trả về tổng số trang.
      */
     @Override
     public int getCount() {
@@ -76,7 +77,7 @@ public class CategoryFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Return page title of the tap
+     * Trả về tiêu đề trang của lần nhấn
      */
     @Override
     public CharSequence getPageTitle(int position) {
